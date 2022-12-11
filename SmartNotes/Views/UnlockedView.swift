@@ -11,6 +11,7 @@ struct UnlockedView: View {
     @Environment(\.managedObjectContext) var moc
     
     @State var addNew = false
+    @Binding var isUnlocked: Bool
     
     var status = ["Completed", "To-Do"]
     @State private var selectedStatus = "To-Do"
@@ -44,6 +45,14 @@ struct UnlockedView: View {
             }
             .navigationTitle("SmartNotes")
             .toolbar {
+                ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
+                    Button {
+                        isUnlocked = false
+                    } label: {
+                        Image(systemName: "lock")
+                    }
+                }
+
                 ToolbarItem() {
                     Button {
                         addNew = true
@@ -61,6 +70,6 @@ struct UnlockedView: View {
 
 struct UnlockedView_Previews: PreviewProvider {
     static var previews: some View {
-        UnlockedView()
+        UnlockedView(isUnlocked: .constant(true))
     }
 }
