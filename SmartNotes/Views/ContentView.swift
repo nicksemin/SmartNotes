@@ -11,11 +11,10 @@ import LocalAuthentication
 
 struct ContentView: View {
     @State private var isUnlocked: Bool = false
-    
+    let laContext = LAContext()
     
     func authenticate() {
         var error: NSError?
-        let laContext = LAContext()
         
         if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Need access to authenticate"
@@ -37,7 +36,9 @@ struct ContentView: View {
     }
     
     var unlockImage: String {
-        if LAContext().biometryType == .faceID {
+        var error: NSError?
+        laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+        if laContext.biometryType == .faceID {
             return "faceid"
         } else {
             return "touchid"
@@ -46,7 +47,7 @@ struct ContentView: View {
     
     var body: some View {
         if isUnlocked {
-            UnlockedView()
+            UnlockedView(isUnlocked: $isUnlocked)
         } else {
             Button {
                 authenticate()
