@@ -6,62 +6,66 @@
 //
 
 import SwiftUI
+import Foundation
+import LocalAuthentication
 
 struct ContentView: View {
+    @State private var isUnlocked: Bool = false
     
-    @Environment(\.managedObjectContext) var moc
     
-    @State var addNew = false
+    func authenticate() {
+        var error: NSError?
+        let laContext = LAContext()
+        
+        if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Need access to authenticate"
+            
+            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
+                DispatchQueue.main.async {
+                    if success {
+                        isUnlocked = true
+                        // failedAuth = ""
+                    } else {
+                        print(error?.localizedDescription ?? "error")
+                        // failedAuth = error?.localizedDescription ?? "error"
+                    }
+                }
+            }
+        } else {
+            
+        }
+    }
     
-    var status = ["Completed", "To-Do"]
-    @State private var selectedStatus = "To-Do"
-    var howToSort: Bool {
-        switch selectedStatus {
-        case "Completed":
-            return true
-        case "To-Do":
-            return false
-        default:
-            return false
+    var unlockImage: String {
+        if LAContext().biometryType == .faceID {
+            return "faceid"
+        } else {
+            return "touchid"
         }
     }
     
     var body: some View {
-        NavigationView{
-            VStack (alignment: .leading) {
-                Picker("", selection: $selectedStatus) {
-                    ForEach(status, id: \.self) {
-                        Text($0)
-                    }
-                }
-                .padding()
-                
-                VStack {
-                    FilteredList(sortDescriptors: [SortDescriptor(\SmartNote.done)], howToSort: howToSort){ (note: SmartNote) in
-                        NoteView(note: note)
-                    }
-                }
-                
-            }
-            .navigationTitle("SmartNotes")
-            .toolbar {
-                ToolbarItem() {
-                    Button {
-                        addNew = true
-                    } label: {
-                        Image(systemName: "plus")
-                    }
+        if isUnlocked {
+            UnlockedView()
+        } else {
+            Button {
+                authenticate()
+            } label: {
+                HStack {
+                    Label("Unlock", systemImage: unlockImage)
+                        .foregroundColor(.white)
+                        .frame(width: 100, height: 33)
+                        .background(RoundedRectangle(cornerRadius: 15).foregroundColor(.blue))
+                    
                 }
             }
-            .sheet(isPresented: $addNew) {
-                AddNoteView()
-            }
+            
         }
     }
 }
 
-/*struct ContentView_Previews: PreviewProvider {
- static var previews: some View {
- ContentView()
- }
- }*/
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
