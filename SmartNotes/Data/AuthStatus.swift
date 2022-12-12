@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+class AuthStatus: ObservableObject {
+    @Published var reponse: Bool
+    
+    init(reponse: Bool) {
+        self.reponse = reponse
+    }
+}
