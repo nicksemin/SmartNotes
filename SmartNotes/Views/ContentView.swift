@@ -6,54 +6,24 @@
 //
 
 import SwiftUI
-import Foundation
-import LocalAuthentication
 
 struct ContentView: View {
-    @State private var isUnlocked: Bool = false
-    let laContext = LAContext()
+    private var auth = AuthController()
+    @ObservedObject var authStatus: AuthStatus
     
-    func authenticate() {
-        var error: NSError?
-        
-        if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Need access to authenticate"
-            
-            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
-                DispatchQueue.main.async {
-                    if success {
-                        isUnlocked = true
-                        // failedAuth = ""
-                    } else {
-                        print(error?.localizedDescription ?? "error")
-                        // failedAuth = error?.localizedDescription ?? "error"
-                    }
-                }
-            }
-        } else {
-            
-        }
-    }
-    
-    var unlockImage: String {
-        var error: NSError?
-        laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
-        if laContext.biometryType == .faceID {
-            return "faceid"
-        } else {
-            return "touchid"
-        }
+    init() {
+        self.authStatus = auth.authStatus
     }
     
     var body: some View {
-        if isUnlocked {
-            UnlockedView(isUnlocked: $isUnlocked)
+        if authStatus.reponse {
+            UnlockedView(isUnlocked: $authStatus.reponse)
         } else {
             Button {
-                authenticate()
+                auth.authenticate()
             } label: {
                 HStack {
-                    Label("Unlock", systemImage: unlockImage)
+                    Label("Unlock", systemImage: auth.unlockImage)
                         .foregroundColor(.white)
                         .frame(width: 100, height: 33)
                         .background(RoundedRectangle(cornerRadius: 15).foregroundColor(.blue))
