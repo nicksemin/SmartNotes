@@ -8,13 +8,26 @@
 import SwiftUI
 
 struct TabbarView: View {
+    @Binding var isUnlocked: Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            UnlockedView(isUnlocked: $isUnlocked)
+                .tabItem {
+                    Image(systemName: "list.dash")
+                    Text("To-do list")
+                }
+            
+            SettingsView()
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")
+                }
+        }
     }
 }
 
 struct TabbarView_Previews: PreviewProvider {
     static var previews: some View {
-        TabbarView()
+        TabbarView(isUnlocked: .constant(true))
     }
 }
