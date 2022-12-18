@@ -8,60 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    private var auth = AuthController()
+    @ObservedObject var authStatus: AuthStatus
     
-    @Environment(\.managedObjectContext) var moc
-    
-    @State var addNew = false
-    
-    var status = ["Completed", "To-Do"]
-    @State private var selectedStatus = "To-Do"
-    var howToSort: Bool {
-        switch selectedStatus {
-        case "Completed":
-            return true
-        case "To-Do":
-            return false
-        default:
-            return false
-        }
+    init() {
+        self.authStatus = auth.authStatus
     }
     
     var body: some View {
-        NavigationView{
-            VStack (alignment: .leading) {
-                Picker("", selection: $selectedStatus) {
-                    ForEach(status, id: \.self) {
-                        Text($0)
-                    }
-                }
-                .padding()
-                
-                VStack {
-                    FilteredList(sortDescriptors: [SortDescriptor(\SmartNote.done)], howToSort: howToSort){ (note: SmartNote) in
-                        NoteView(note: note)
-                    }
-                }
-                
-            }
-            .navigationTitle("SmartNotes")
-            .toolbar {
-                ToolbarItem() {
-                    Button {
-                        addNew = true
-                    } label: {
-                        Image(systemName: "plus")
-                    }
+        if authStatus.reponse {
+            UnlockedView(isUnlocked: $authStatus.reponse)
+        } else {
+            Button {
+                auth.authenticate()
+            } label: {
+                HStack {
+                    Label("Unlock", systemImage: auth.unlockImage)
+                        .foregroundColor(.white)
+                        .frame(width: 100, height: 33)
+                        .background(RoundedRectangle(cornerRadius: 15).foregroundColor(.blue))
+                    
                 }
             }
-            .sheet(isPresented: $addNew) {
-                AddNoteView()
-            }
+            
         }
     }
 }
 
-/*struct ContentView_Previews: PreviewProvider {
- static var previews: some View {
- ContentView()
- }
- }*/
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
