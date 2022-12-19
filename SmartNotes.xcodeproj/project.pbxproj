@@ -17,6 +17,8 @@
 		66DA8FEF294669F0005583B0 /* UnlockedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DA8FEE294669F0005583B0 /* UnlockedView.swift */; };
 		66DA8FF829479E18005583B0 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DA8FF729479E18005583B0 /* AuthController.swift */; };
 		66DA8FFA2947AD12005583B0 /* AuthStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DA8FF92947AD12005583B0 /* AuthStatus.swift */; };
+		66DC8668294FA44D000D406A /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DC8667294FA44D000D406A /* TabbarView.swift */; };
+		66DC866A294FA552000D406A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DC8669294FA552000D406A /* SettingsView.swift */; };
 		66EF13D8287F3BFF008C9B32 /* SmartNote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66EF13D6287F3BFF008C9B32 /* SmartNote.xcdatamodeld */; };
 		66EF13DA287F3E67008C9B32 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EF13D9287F3E67008C9B32 /* DataController.swift */; };
 		66EF1418288C9F21008C9B32 /* SmartNote+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EF1416288C9F21008C9B32 /* SmartNote+CoreDataClass.swift */; };
@@ -36,6 +38,8 @@
 		66DA8FEE294669F0005583B0 /* UnlockedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockedView.swift; sourceTree = "<group>"; };
 		66DA8FF729479E18005583B0 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		66DA8FF92947AD12005583B0 /* AuthStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStatus.swift; sourceTree = "<group>"; };
+		66DC8667294FA44D000D406A /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
+		66DC8669294FA552000D406A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		66EF13D7287F3BFF008C9B32 /* NoteData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteData.xcdatamodel; sourceTree = "<group>"; };
 		66EF13D9287F3E67008C9B32 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		66EF1416288C9F21008C9B32 /* SmartNote+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SmartNote+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 				666AB2DD2860FF5C00AEC58A /* AddNoteView.swift */,
 				666AB2D9285F62E400AEC58A /* CheckBox.swift */,
 				66DA8FEE294669F0005583B0 /* UnlockedView.swift */,
+				66DC8667294FA44D000D406A /* TabbarView.swift */,
+				66DC8669294FA552000D406A /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,11 +195,13 @@
 				66DA8FFA2947AD12005583B0 /* AuthStatus.swift in Sources */,
 				666AB2CA285F602100AEC58A /* ContentView.swift in Sources */,
 				66DA8FF829479E18005583B0 /* AuthController.swift in Sources */,
+				66DC866A294FA552000D406A /* SettingsView.swift in Sources */,
 				66EF1419288C9F21008C9B32 /* SmartNote+CoreDataProperties.swift in Sources */,
 				66EF141B288C9FCC008C9B32 /* FilteredList.swift in Sources */,
 				66EF1418288C9F21008C9B32 /* SmartNote+CoreDataClass.swift in Sources */,
 				666AB2C8285F602100AEC58A /* SmartNotesApp.swift in Sources */,
 				666AB2D8285F60E600AEC58A /* NoteView.swift in Sources */,
+				66DC8668294FA44D000D406A /* TabbarView.swift in Sources */,
 				66DA8FEF294669F0005583B0 /* UnlockedView.swift in Sources */,
 				66EF13DA287F3E67008C9B32 /* DataController.swift in Sources */,
 				66EF13D8287F3BFF008C9B32 /* SmartNote.xcdatamodeld in Sources */,
