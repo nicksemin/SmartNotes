@@ -17,7 +17,7 @@ struct ContentView: View {
     
     var body: some View {
         if authStatus.reponse {
-            UnlockedView(isUnlocked: $authStatus.reponse)
+            TabbarView(isUnlocked: $authStatus.reponse)
         } else {
             Button {
                 auth.authenticate()
